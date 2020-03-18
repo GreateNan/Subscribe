@@ -1,0 +1,72 @@
+/* pages/dateCommnet/dateCommnet.wxss */
+
+page {
+  background: #fff;
+}
+
+.bott {
+  height: 88rpx;
+  line-height: 88rpx;
+  font-size: 28rpx;
+  text-align: center;
+ background-color: #fd7464;
+  color: #FFF;
+  width: 90%;
+  margin: 20rpx 5%;
+  border-radius: 50rpx;
+}
+.popup {
+  height: 100%;
+  width: 100%;
+  z-index: 1000;
+  position: absolute;
+  background: rgb(51, 51, 51, 0.2);
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.popup .cont {
+  width: 90%;
+  font-size: 28rpx;
+  background: #fff;
+  margin-top: 40%;
+  border-radius: 20rpx;
+}
+
+.popup .cont .titlec {
+  height: 100rpx;
+  width: 90%;
+  padding: 50rpx 5% 50rpx 5%;
+  font-size: 32rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.popup .cont .titlec input{
+  border-bottom: 1rpx #eee solid;
+  padding: 20rpx 0;
+  width: 100%;
+}
+
+.popup .cont .func {
+  width: 100%;
+  height: 100rpx;
+  line-height: 100rpx;
+  display: flex;
+  border-top: 2rpx solid #eee;
+}
+
+.func view {
+  width: 50%;
+  text-align: center;
+}
+
+.func :last-child {
+  color: #fd7464;
+  border-left: 1rpx solid #eee;
+
+}
+

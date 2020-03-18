@@ -1,0 +1,64 @@
+<view class="conter flexc">
+  <view class="flexr heard">
+    <view class="flexc">
+      <image src="{{fruitDetail.imgUrl}}"></image>
+      <view style="margin-top:10rpx;">{{fruitDetail.name}}</view>
+      <view style="font-size:26rpx" wx:if="{{fruitDetail.position==0}}">店长
+      </view>
+      <view style="font-size:26rpx" wx:else>首席
+      </view>
+    </view>
+    <view class="flexc" style="justify-content:flex-start;align-items: flex-start;">
+      <view style="font-size:50rpx;">{{time}}</view>
+     
+      <view style="font-size:26rpx;margin-top:20rpx;">{{date}}({{sWeek}})</view>
+      <view class="flexr " style="margin-top:10rpx;">
+        <image src="../../images/icon/sun.png" class="icon"></image>
+        <view>{{sxw}}</view>
+      </view>
+    </view>
+  </view>
+  <view class="cover flexc">
+    <view class="item felxc">
+      <view class="title flexr">
+        <image src="../../images/icon/classify.png"></image>
+        <view>预约项目</view>
+      </view>
+      <view class="cont">
+        <text wx:for="{{ids}}">{{item}}</text>
+      </view>
+    </view>
+
+    <view class="item felxc">
+      <view class="title flexr">
+        <image src="../../images/icon/phoneIN.png"></image>
+        <view>联系电话</view>
+      </view>
+      <view class="cont">
+        <input placeholder="请输入您的联系方式" bindinput="in" data-id="2" type="number"></input>
+      </view>
+    </view>
+    <view class="item felxc">
+      <view class="title flexr">
+        <image src="../../images/icon/nicehng.png"></image>
+        <view>昵称</view>
+      </view>
+      <view class="cont">
+        <input placeholder="请输入您的昵称或真实姓名" bindinput="in" data-id="3"></input>
+      </view>
+    </view>
+    <view class="item felxc">
+      <view class="title flexr">
+        <image src="../../images/icon/edit.png"></image>
+        <view>备注</view>
+      </view>
+      <view class="cont">
+        <input placeholder="您有什么特殊要求可以著名" bindinput="in" data-id="1"></input>
+      </view>
+    </view>
+  </view>
+
+  <view class="yuyue" bindtap="exchange">
+    立即预约
+  </view>
+</view>

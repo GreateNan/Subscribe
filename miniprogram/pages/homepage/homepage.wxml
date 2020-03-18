@@ -1,0 +1,113 @@
+<!-- 维护 -->
+<view style='height:100%;width:750rpx;background:white;line-height:1200rpx;text-align:center' wx:if="{{offLine}}">打烊啦~~~~~</view>
+<!-- wx:if="{{isShow && !offLine}}" -->
+
+<view class='myHomePage' wx:if="{{isShow && !offLine}}">
+  <!--搜索框-->
+  <!-- <mySearch></mySearch> -->
+
+  <!-- 轮播图 -->
+  <!-- <view style='height:500rpx;width:100%'> 
+  <swiper></swiper>
+</view> -->
+  <!-- 店铺信息 -->
+  <view class="heard flexr">
+    <view class="kapian flexr">
+      <view class="logo">
+        <image src="{{shop.shopLogo}}"></image>
+      </view>
+
+      <view class="textc">
+        <view style="font-size:32rpx;">
+          {{shop.shopName}}
+        </view>
+        <view style="font-size:24rpx;" class="flexr address">
+          <view> {{shop.shopAddress}}</view>
+          <view class="flexr yjt" bindtap="map">
+            <text>{{juli}}km</text>
+            <image src="../../images/icon/yjt.png"></image>
+          </view>
+        </view>
+
+        <view class="flexr" style="justify-content: flex-start; font-size:24rpx;margin-top:20rpx;" bindtap="phone">
+          <image src="../../images/icon/phone.png"></image>
+          <text>{{shop.shopPhone}}</text>
+        </view>
+      </view>
+      <view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 分类展示 -->
+  <view class='type-container'>
+    <view class='type-item' wx:for="{{typeCat}}" wx:key="id">
+      <view id='{{item.id}}' class="type-name {{activeTypeId === item.id ? 'type-item-on' : ''}}" bindtap='typeSwitch'>
+        {{item.name}}
+      </view>
+    </view>
+  </view>
+
+  <!-- 商品图 -->
+  <view class='extra'></view>
+  <view class='fruit-container'>
+    <!-- 水果信息卡片 -->
+    <block wx:for="{{fruitInfo}}" wx:key='fruitID'>
+
+      <view class='fruit-item flexc' bindtap='tapToDetail' data-fID="{{item._id}}" wx:if="{{item.onShow}}">
+        <view style="width:90%;">
+          <view class="flexr firstr">
+            <view class="imgUrl flexr">
+              <image src="{{item.imgUrl}}"></image>
+            </view>
+            <view class="flexr all">
+              <view class="flexc" style="align-items:flex-start">
+                <view style="font-size:30rpx;color:#000">{{item.name}}</view>
+                <view style="margin:5rpx 0" wx:if="{{item.position==0}}">店长
+                </view>
+                <view style="margin:5rpx 0" wx:else>首席
+                </view>
+                <view class="flexr">
+                  <view style="margin-right:10rpx">
+                    <image src="../../images/icon/haopin.png"></image>
+                    <text style="color:#fd7464">好评率{{item.goodReputation}}%</text>
+                  </view>
+                  <view>
+                    <image src="../../images/icon/yuyue.png"></image>
+                    <text>被预约{{item.reservations}}</text>
+                  </view>
+                </view>
+
+              </view>
+              <view class="flexc">
+                <view>剪发价
+                  <text style="color:#fd7464;font-weight: 700;font-style:italic;font-size:28rpx;">￥{{item.price}}</text>
+                </view>
+                <view style=" background:#F4F4F4;border-radius: 50rpx; padding: 5rpx 40rpx;color:#fd7464;margin-top:10rpx">
+                  预约
+                </view>
+              </view>
+            </view>
+          </view>
+          <view class="flexr" style="margin-top:20rpx; flex-wrap:wrap;justify-content: flex-start;">
+            <view wx:for="{{item.entry}}" wx:for-item="itemSub" style="background:#F4F4F4;border-radius: 50rpx; padding: 5rpx 40rpx;margin-right: 10rpx;margin-top: 10rpx;">
+              {{itemSub}}
+            </view>
+          </view>
+        </view>
+      </view>
+
+    </block>
+  </view>
+
+  <!-- 底部 -->
+  <view class='homeBottom'>
+    <view class='bottomLine'></view>
+    <view class='bottomWord'>Nan Sir</view>
+    <view class='bottomLine'></view>
+  </view>
+
+</view>
+<view class="call pulse animated infinite" bindtap="goYuyue">
+  <image src="../../images/icon/shijian.png" style="height:50rpx;width:50rpx;"></image>
+</view>

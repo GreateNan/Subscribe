@@ -1,0 +1,20 @@
+page {
+  font-size: 32rpx;
+  font-family: PingFangSC-Light, helvetica, 'Heiti SC';
+}
+
+.tips {
+  font-size: 28rpx;
+}
+
+.weui-input {
+  font-size: 32rpx;
+}
+
+.weui-btn {
+  background-color: #f8d084 !important;
+  border: 0;
+  width: 100%;
+  padding: 10rpx 0;
+  font-size: 30rpx;
+}

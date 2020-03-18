@@ -1,0 +1,18 @@
+page{
+  font-size: 28rpx;
+}
+.elasticity{
+display: flex;
+align-items: center;
+justify-content: center;
+flex-direction: row;
+
+
+}
+.col_flex{
+display: flex;
+align-items: center;
+justify-content: center;
+flex-direction: column;
+
+}

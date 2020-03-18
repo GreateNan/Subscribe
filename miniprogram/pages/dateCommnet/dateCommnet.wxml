@@ -1,0 +1,20 @@
+<view wx:if="{{flag}}">
+  <date-picker startTime="{{startTime}}" endTime="{{endTime}}" unit="{{unit}}" reserveUnit="{{reserveUnit}}" unreserveTime="{{unreserveTime}}" activedConst="{{activedConst}}" disabledConst="{{disabledConst}}" themeColor="{{themeColor}}" bind:selectTime="onSelectTime"
+  />
+
+  <view class="bott" bindtap="{{!isgo?'btnOk':'show'}}">
+   下一步
+  </view>
+</view>
+<view class="popup" wx:if="{{heddin}}">
+  <view class="cont">
+    <view class="titlec">
+
+      <input type="number" placeholder="请输如您的手机号" bindinput="inPhone"></input>
+    </view>
+    <view class="func">
+      <view bindtap="quxiao">取消</view>
+      <view bindtap="exchange">确认</view>
+    </view>
+  </view>
+</view>

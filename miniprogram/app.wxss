@@ -1,0 +1,24 @@
+/**app.wxss**/
+@import './style/animate.wxss';
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  font-size: 28rpx;
+  font-family: PingFang-SC-Medium;
+  color: #000;
+}
+.flexr{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+ 
+}
+.flexc{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}

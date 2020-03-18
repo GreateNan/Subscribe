@@ -1,0 +1,50 @@
+<view class="conter flexc">
+  <view wx:for="{{orders}}" wx:key="{{item._id}}" style="width:95%" wx:if="{{orders.length>0}}">
+    <view class="flexc item">
+      <view class="heard flexc">
+        <view class="flexr time">
+          <view class="dian"></view>
+          <view>{{item.time}}</view>
+        </view>
+        <view class="flexr date" style="margin-left:60rpx;margin-top:10rpx;">
+          <view>{{item.data2}}({{item.sWeek}})</view>
+          <view wx:if="{{item.status==5}}" style="color:#fd7464;margin-left:20rpx;">已服务</view>
+         <view wx:else>
+          <view class="flexr" style="margin-left:10rpx;" wx:if="{{!item.istimeOut}}">
+            <image src="../../images/icon/shizhong.png"></image>
+            <view style="color:#fd7464">{{item.timeDjs}}</view>
+          </view>
+          <view wx:else>
+            <view style="color:#fd7464;margin-left:20rpx;">过期了</view>
+          </view>
+         </view>
+        </view>
+      </view>
+      <view class="cover flexc">
+        <view class="flexr con">
+          <image src="{{item.fruitboardimgUrl}}"></image>
+          <view>
+            <view>预约服务者</view>
+            <view style="font-size:24rpx;">{{item.fruitboardname}}</view>
+          </view>
+        </view>
+        <view class="quxiao" data-id="{{item._id}}" bindtap="{{item.status==5?'':'quxiao'}}" style="background-color:{{item.status==5?'#666':''}}"> 取消预约</view>
+      </view>
+    </view>
+  </view>
+  <view wx:if="{{orders.length==0}}" class="flexc" style="height:100%;width:100%;">
+    <image src="../../images/icon/wushuju.png" mode="widthFix" style="width:200rpx;"></image>
+    <view style="font-size:28rpx;">
+    还没有预约
+    </view>
+  </view>
+</view>
+
+<view class="admin" hidden="{{!(isAdmin >= 0)}}">
+  <!-- 后台管理 -->
+  <image class="bgInfo {{openid}}" bindtap='goToBgInfo' src="../../images/icon/admin.png"></image>
+  <!-- 预约单管理 -->
+  <image class="bgInfo {{openid}}" bindtap='goToBgManage' src="../../images/icon/orderY.png"></image>
+    <!-- 授权-->
+  <!-- <image class="bgInfo {{openid}}" bindtap='adminManage' src="../../images/icon/shouquan.png"></image> -->
+</view>

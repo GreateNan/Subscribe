@@ -1,0 +1,111 @@
+<view class='tapCard'>
+  <view class="addCard {{cardNum === 1 ? 'tapOn':'tapOff'}} " bindtap='tapTo1'>待服务</view>
+  <view class="delCard {{cardNum === 2 ? 'tapOn':'tapOff'}} " bindtap='tapTo2'>已取消</view>
+  <view class="deliver {{cardNum === 3 ? 'tapOn':'tapOff'}} " bindtap='tapTo3'>已过期</view>
+  <view class="deliver {{cardNum === 5? 'tapOn':'tapOff'}} " bindtap='tapTo5'>已服务</view>
+  <view class="deliver {{cardNum === 4 ? 'tapOn':'tapOff'}} " bindtap='tapTo4'>全部预约</view>
+
+</view>
+
+<!-- 已支付 -->
+<view class='addFruit' wx:if="{{cardNum === 1}}">
+
+  <view class='theList'>
+    <view class="weui-cells weui-cells_after-title">
+      <view wx:for="{{orderList}}" wx:key="idx" class='listItem' wx:if="{{!item.sending}}">
+        <view class='f_column'>
+          <view>{{item.name}}</view>
+          <view>{{item.phone}}</view>
+          <view>{{item.data2}}{{item.data}}({{item.sWeek}})</view>
+
+          <view>订单内容：</view>
+          <view wx:for="{{item.sever}}" wx:for-item="fruitArr" wx:key="fruit">{{fruitArr}}</view>
+          <view>备注：{{item.remark}}</view>
+          <view>下单时间：{{item.orderTime}}</view>
+             <view>服务者：{{item.fruitboardname}}</view>
+        </view>
+
+        <view class='Btns'>
+          <view class='downBtn' bindtap='boxFruit' id="{{item._id}}">服务</view>
+        </view>
+      </view>
+
+    </view>
+
+  </view>
+</view>
+
+<!-- 已发货 -->
+<view class='addFruit' wx:if="{{cardNum === 2||cardNum === 5||cardNum === 3}}">
+
+ <view class='theList'>
+    <view class="weui-cells weui-cells_after-title">
+      <view wx:for="{{orderList}}" wx:key="idx" class='listItem' wx:if="{{!item.sending}}">
+        <view class='f_column'>
+          <view>{{item.name}}</view>
+          <view>{{item.phone}}</view>
+          <view>{{item.data2}}{{item.data}}({{item.sWeek}})</view>
+
+          <view>订单内容：</view>
+          <view wx:for="{{item.sever}}" wx:for-item="fruitArr" wx:key="fruit">{{fruitArr}}</view>
+          <view>备注：{{item.remark}}</view>
+          <view>下单时间：{{item.orderTime}}</view>
+             <view>服务者：{{item.fruitboardname}}</view>
+        </view>
+
+        <view class='Btns'>
+          <view class='downBtn' bindtap='binRm' id="{{item._id}}">删除</view>
+        </view>
+      </view>
+
+    </view>
+
+  </view>
+</view>
+
+<!-- 已送达 -->
+<view class='addFruit' wx:if="{{cardNum === 3}}">
+
+  <view class='theList'>
+
+    <view class="weui-cells weui-cells_after-title">
+      <view wx:for="{{orderList}}" wx:key="pay" class='listItem' wx:if="{{item.finished}}">
+        <view class='f_column'>
+          <view>{{item.name}}</view>
+          <view>{{item.phone}}</view>
+          <view>{{item.address}}/{{item.xxAddress}}</view>
+          <view>总价：{{item.total}}</view>
+          <view>订单内容：</view>
+          <view wx:for="{{item.fruitList}}" wx:for-item="fruitArr" wx:key="fruit">{{fruitArr[0]}} × {{fruitArr[1]}}</view>
+          <view>备注：{{item.message}}</view>
+          <view>送达时间：{{item.finishedTime}}</view>
+        </view>
+      </view>
+    </view>
+
+  </view>
+</view>
+
+<!-- 全部 -->
+<view class='addFruit' wx:if="{{cardNum === 4}}">
+
+ <view class='theList'>
+    <view class="weui-cells weui-cells_after-title">
+      <view wx:for="{{orderList}}" wx:key="idx" class='listItem' wx:if="{{!item.sending}}">
+        <view class='f_column'>
+          <view>{{item.name}}</view>
+          <view>{{item.phone}}</view>
+          <view>{{item.data2}}{{item.data}}({{item.sWeek}})</view>
+
+          <view>订单内容：</view>
+          <view wx:for="{{item.sever}}" wx:for-item="fruitArr" wx:key="fruit">{{fruitArr}}</view>
+          <view>备注：{{item.remark}}</view>
+          <view>下单时间：{{item.orderTime}}</view>
+             <view>服务者：{{item.fruitboardname}}</view>
+        </view>
+      </view>
+
+    </view>
+
+  </view>
+</view>

@@ -1,0 +1,38 @@
+{
+  "cloud": true,
+  "pages": [
+      "pages/homepage/homepage",
+    "pages/me/me",
+    "pages/bgManage/bgManage",
+  
+  
+    "pages/bgInfo/bgInfo",
+   
+    "pages/appointment/appointmentInfo",
+    "pages/cart/cart",
+    "pages/dateCommnet/dateCommnet",
+    "pages/detail/detail",
+    "pages/address/address",
+    "pages/pay/pay",
+    "pages/orders/orders"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#F4F4F4",
+    "navigationBarTitleText": "潮人美业",
+    "navigationBarTextStyle": "black",
+    "enablePullDownRefresh": false
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于构建您的配送信息"
+    }
+  },
+  "plugins": {
+    "myPlugin": {
+      "version": "1.0.0",
+      "provider": "wx84472d5652384779"
+    }
+  },
+  "sitemapLocation": "sitemap.json"
+}

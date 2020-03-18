@@ -1,0 +1,54 @@
+<!--miniprogram/pages/cart.wxml-->
+<view class="main">
+  <!-- wx:if="{{hasList}}" -->
+  <view>
+
+    <!-- 选项卡 -->
+    <view class="cart-box">
+      <!-- 商品卡片 -->
+      <view class="cart-list" wx:for="{{carts}}" wx:key="{{index}}">
+        <!-- 勾选图标 -->
+        <icon wx:if="{{item.selected}}" type="success" color="#fd7464" data-index="{{index}}" class="cart-pro-select" bindtap="selectList" />
+        <icon wx:else type="circle" class="cart-pro-select" data-index="{{index}}" bindtap="selectList" />
+
+        <!-- 名称 -->
+        <view>
+          <text class="cart-pro-name">{{item.name}}</text>
+           <text class="cart-pro-name">服务时长{{item.time}}分钟</text>
+        </view>
+        <!-- 价格 -->
+        <text class="cart-pro-price">￥{{item.price}}</text>
+
+
+      </view>
+    </view>
+
+    <!-- 底部导航 -->
+    <view class="cart-footer">
+      <!-- 全选图标 -->
+      <!-- <icon wx:if="{{selectAllStatus}}" type="success_circle" color="#fd7464" class="total-select" bindtap="selectAll"/>
+            <icon wx:else type="circle" color="#333" class="total-select" bindtap="selectAll"/> -->
+ 
+
+      <!-- 总价 -->
+      <view class="cart-toatl-price" >您选择的服务，将用于为您设置服务时长</view>
+      <!-- 支付按钮 -->
+      <view class="order-icon">
+
+          <view bindtap="goSelect">下一步</view>
+     
+      </view>
+    </view>
+
+  </view>
+
+  <!-- 空购物车 -->
+  <!-- <view wx:else>
+        <view class="cart-no-data">预订单是空的哦~</view>
+        <navigator url='/pages/homepage/homepage' open-type="switchTab">
+          <view class='cartBtn'>去预约</view>
+        </navigator>
+        
+    </view> -->
+
+</view>

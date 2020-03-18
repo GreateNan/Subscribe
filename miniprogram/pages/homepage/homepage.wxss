@@ -1,0 +1,213 @@
+page {
+  background-color: #f4F4F4;
+}
+
+/* 轮播图 */
+
+.swiperContainer {
+  width: 750prx;
+  height: 500rpx;
+}
+
+.fruit-board {
+  margin-top: 10rpx;
+}
+
+/* 分类选项卡 */
+
+.type-container {
+  display: flex;
+  justify-content: start;
+  padding: 5rpx 20rpx 0 20rpx;
+  background: rgb(254, 152, 68,0.5);
+  margin-top: 15rpx;
+}
+
+.type-container .type-item {
+  width: 25%;
+  height: 60rpx;
+}
+
+.type-container .type-item view {
+  font-size: 25rpx;
+  text-align: center;
+  line-height: 60rpx;
+  border-radius: 10rpx 10rpx 0 0;
+  margin: 0 3rpx;
+}
+
+.type-contain.type-container .type-item {
+  width: 150rpx;
+  height: 60rpx;
+}
+
+.type-container .type-item view {
+  font-size: 25rpx;
+  text-align: center;
+  line-height: 60rpx;
+  background-color: rgb(253, 116, 100,0.5);
+  color: rgb(255, 255, 255);
+}
+
+.type-container .type-item .type-item-on {
+  background-color: #fd7464;
+  color: white;
+  box-shadow: 3rpx grey;
+}
+
+/* 补偿条 */
+
+.extra {
+  background-color: rgb(245, 249, 253);
+  width: 750rpx;
+  border-radius: 15rpx 15rpx 0 0;
+}
+
+/* 商品图 */
+
+.fruit-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 710rpx;
+  margin: 20rpx;
+  border-radius: 10rpx 10rpx 0 0;
+  margin-top: 40rpx;
+}
+
+.fruit-item {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 15rpx;
+  margin-bottom: 20rpx;
+  background-color: white;
+  box-shadow: 3.5rpx 3.5rpx 1rpx #d3d1d1;
+  font-size: 24rpx;
+  color: #666;
+  padding: 40rpx 0;
+}
+
+.fruit-container .firstr {
+  /* justify-content: space-between; */
+  width: 100%;
+}
+
+.fruit-item image {
+  height: 30rpx;
+  width: 30rpx;
+  vertical-align: middle;
+  margin-right: 10rpx;
+}
+
+.fruit-item .imgUrl {
+  border-radius: 50%;
+  flex: 1;
+}
+
+.fruit-item .imgUrl image {
+  border-radius: 50%;
+  height: 100rpx;
+  width: 100rpx;
+}
+
+.fruit-item  .all {
+  flex: 9;
+
+  justify-content: space-between;
+}
+
+/* 主页底部 */
+
+.homeBottom {
+  padding-bottom: 25rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.homeBottom .bottomLine {
+  height: 1rpx;
+  width: 50rpx;
+  background: rgb(202, 201, 201);
+  margin: 0 15rpx;
+}
+
+.homeBottom .bottomWord {
+  font-size: 25rpx;
+  color: rgb(202, 201, 201);
+}
+
+/* 头部 */
+
+.heard {
+  width: 100%;
+  margin: 10% 0;
+}
+
+.heard .kapian {
+  width: 90%;
+  background: linear-gradient(to right, #fe9844, #fd7464);
+  color: white;
+  font-size: 28rpx;
+  border-radius: 16rpx;
+  padding: 40rpx 20rpx;
+  border: 1rpx solid #fd7464;
+  box-shadow: 0rpx 0rpx 10rpx 0rpx #fd7464;
+}
+
+.kapian image {
+  width: 30rpx;
+  height: 30rpx;
+}
+
+.kapian .logo {
+  flex: 2;
+  margin-right: 20rpx;
+}
+
+.kapian .textc {
+  flex: 8;
+}
+
+.kapian .logo image {
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 50%;
+}
+
+.kapian .address {
+  justify-content: space-between;
+  margin-top: 5rpx;
+}
+
+.kapian .address .yjt {
+  background: rgb(255, 255, 255, 0.3);
+  border-radius: 50rpx;
+  padding: 5rpx 10rpx;
+  margin-left: 10rpx;
+}
+
+.yjt text {
+  margin-right: 10rpx;
+}
+
+.yjt image {
+  width: 30rpx;
+  height: 30rpx;
+}
+.call{
+  background-color: rgb(0, 0, 0,0.2);
+  position: fixed;
+  right: 20rpx;
+  bottom: 20%;
+  color: #000;
+  font-size: 28rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  height:80rpx;
+  width: 80rpx;
+  
+}

@@ -1,0 +1,41 @@
+page {
+  font-size: 28rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+}
+
+.l {
+  float: left;
+}
+
+.r {
+  float: right;
+}
+
+.clear {
+  clear: both;
+}
+
+.over {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ml10 {
+  margin-left: 20rpx;
+}
+
+.mr10 {
+  margin-right: 20rpx;
+}
+
+.interval {
+  width: 100%;
+  height: 20rpx;
+  background: #f4f4f4;
+}

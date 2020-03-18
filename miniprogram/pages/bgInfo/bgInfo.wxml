@@ -1,0 +1,338 @@
+<view class='bgInfo'>
+  <!-- 选项卡 -->
+  <view class='tapCard'>
+    <view class="addCard {{cardNum === 1 ? 'tapOn':'tapOff'}} " bindtap='tapTo1'>添加服务者信息</view>
+    <view class="delCard {{cardNum === 2 ? 'tapOn':'tapOff'}} " bindtap='tapTo2'>服务者在线设置</view>
+    <view class="deliver {{cardNum === 3 ? 'tapOn':'tapOff'}} " bindtap='tapTo3'>服务上架</view>
+    <view class="deliver {{cardNum === 4 ? 'tapOn':'tapOff'}} " bindtap='tapTo4'>添加门店</view>
+  </view>
+
+  <!-- 添加产品 -->
+  <view class='addFruit' wx:if="{{cardNum === 3}}">
+    <view class='page_create'>
+      <!---------- 订单信息 ------------->
+      <view class="weui-cells__title">添加信息</view>
+
+      <view class="weui-cells weui-cells_after-title">
+
+        <!-- 产品名称 -->
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">服务名称</view>
+          </view>
+          <view class="weui-cell__bd weui-cell__ft">
+            <input class="weui-input" bindinput='geProductName' />
+          </view>
+        </view>
+        <!-- 产品编号 -->
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">服务时长（分钟）</view>
+          </view>
+          <view class="weui-cell__bd weui-cell__ft">
+            <input class="weui-input" type="digit" bindinput='getProductTime' />
+          </view>
+        </view>
+        <!-- 价格 -->
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">服务价格</view>
+          </view>
+          <view class="weui-cell__bd weui-cell__ft">
+            <input class="weui-input" type="digit" bindinput='getProductPrice' />
+          </view>
+        </view>
+
+
+      </view>
+    </view>
+    <!---------- 按钮 ------------->
+    <view class="weui-btn-area">
+      <button class="weui-btn" type="primary" bindtap="addProduct">确认添加产品信息</button>
+    </view>
+  </view>
+
+  <!-----------------------!!!! 上架修改 !!!!---------------------------->
+  <view class='deleteFruit' wx:if="{{cardNum === 2}}">
+
+    <!-- 上下架产品 -->
+    <view class='theList'>
+      <!-- 线上产品 -->
+      <view class="weui-cells__title">在线服务者</view>
+      <view class="weui-cells weui-cells_after-title">
+        <view wx:for="{{manageList}}" wx:key="time" class='listItem' wx:if="{{item.onShow}}">
+          <view>{{item.name}}</view>
+          <view class='Btns'>
+            <!-- <view class='changeBtn'>修改</view> -->
+            <view class='downBtn' bindtap='downFromLine' id="{{item._id}}">下线</view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 线下产品 -->
+      <view class="weui-cells__title">线下服务者</view>
+      <view class="weui-cells weui-cells_after-title">
+        <view wx:for="{{manageList}}" wx:key="time" class='listItem' wx:if="{{!item.onShow}}">
+          <view>{{item.name}}</view>
+          <view class='Btns'>
+            <!-- <view class='changeBtn'>修改</view> -->
+            <view class='upBtn' bindtap='upToLine' id="{{item._id}}">上线</view>
+          </view>
+
+        </view>
+      </view>
+
+    </view>
+
+    <!-- 打烊 -->
+    <view class="weui-btn-area">
+      <button class="weui-btn" type="primary" bindtap="offLine">打烊/营业</button>
+    </view>
+
+    <!-- 删除产品 -->
+    <view class='myInput'>
+      <input placeholder='输入要删除的服务者名称' bindinput='getDelFruitId'></input>
+    </view>
+    <view bindtap='deleteFruit' class='downBtn'>删除</view>
+
+  </view>
+
+
+  <!-----------------------!!!! 添加产品 !!!!---------------------------->
+  <view class='deleteFruit' wx:if="{{cardNum === 1}}">
+    <view class='page_create'>
+      <!---------- 订单信息 ------------->
+      <view class="weui-cells__title">添加信息</view>
+
+      <view class="weui-cells weui-cells_after-title">
+
+        <!-- 产品名称 -->
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">服务者名称</view>
+          </view>
+          <view class="weui-cell__bd weui-cell__ft">
+            <input class="weui-input" bindinput='getName' />
+          </view>
+        </view>
+        <!-- 产品编号 -->
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">好评率</view>
+          </view>
+          <view class="weui-cell__bd weui-cell__ft">
+            <input class="weui-input" type="digit" bindinput='getFruitID' />
+          </view>
+        </view>
+        <!-- 价格 -->
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">基础价格</view>
+          </view>
+          <view class="weui-cell__bd weui-cell__ft">
+            <input class="weui-input" type="digit" bindinput='getPrice' />
+          </view>
+        </view>
+        <!-- 单位 -->
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">基础预约数</view>
+          </view>
+          <view class="weui-cell__bd weui-cell__ft">
+            <input class="weui-input" bindinput='getUnit' />
+          </view>
+        </view>
+
+      </view>
+
+      <!---------- 描述信息 ------------->
+      <view class="weui-cells__title">描述信息</view>
+
+      <view class="weui-cells weui-cells_after-title">
+
+        <!-- 描述照片 -->
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__bd cell-title">服务者照片照片</view>
+          <view class="weui-cell__ft">
+            <picker range="{{Operator_Arr}}" value="{{Operator}}" bindchange="getOperator">
+              <view class="weui-input"></view>
+            </picker>
+          </view>
+        </view>
+        <!-- 添加照片 -->
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <view class="weui-uploader">
+              <view class="weui-uploader__bd">
+                <view class="weui-uploader__files" id="uploaderFiles">
+                  <block wx:for="{{files}}" wx:key="*this">
+                    <view class="weui-uploader__file" bindtap="previewImage" id="{{item}}">
+                      <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
+                    </view>
+                  </block>
+                </view>
+                <view class="weui-uploader__input-box" wx:if="{{files.length==0}}">
+                  <view class="weui-uploader__input" bindtap="chooseImage"></view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <!-- 详细信息 -->
+        <view class="weui-cell">
+          <view class="weui-uploader__hd">
+            <view class="section">
+              <textarea bindblur="getInfoText" auto-height placeholder="服务者词条 需要用‘空格’分割" style="min-height: 250rpx;" />
+            </view>
+          </view>
+        </view>
+
+
+      </view>
+
+      <!---------- 优惠信息 ------------->
+      <view class="weui-cells__title">服务者身份</view>
+
+      <view class="weui-cells weui-cells_after-title">
+        <!-- 今日特惠 -->
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__bd cell-title">服务者身份</view>
+          <view class="weui-cell__ft">
+            <picker range="{{myClass_Arr}}" value="{{myClass}}" bindchange="getMyClass">
+              <view class="weui-input">{{myClass_Arr[myClass]||'店长'}}</view>
+            </picker>
+          </view>
+        </view>
+        <!-- 店主推荐 -->
+        <!-- <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__bd cell-title">二瑞清推荐</view>
+          <view class="weui-cell__ft">
+            <picker range="{{recommend_Arr}}" value="{{recommend}}" bindchange="getRecommend">
+              <view class="weui-input">{{recommend_Arr[recommend]||'否'}}</view>
+            </picker>
+          </view>
+        </view> -->
+
+      </view>
+
+      <view style="margin-top:20rpx;">
+        <view style="height:88rpx;line-height:88rpx;">添加服务者能力</view>
+        <checkbox-group bindchange="checkboxChange">
+          <label class="checkbox" wx:for="{{carts}}">
+            <checkbox value="{{item._id}}" checked="{{item.checked}}" />{{item.name}}
+          </label>
+        </checkbox-group>
+      </view>
+      <!---------- 按钮 ------------->
+      <view class="weui-btn-area">
+        <button class="weui-btn" type="primary" bindtap="addFruitInfo">确认添加服务者信息</button>
+      </view>
+
+      <!-- end -->
+    </view>
+  </view>
+
+  <!-----------------------!!!! 添加店铺 !!!!---------------------------->
+  <view class='deleteFruit' wx:if="{{cardNum === 4}}">
+    <view class='page_create'>
+      <!---------- 订单信息 ------------->
+      <view class="weui-cells__title">添加门店</view>
+
+      <view class="weui-cells weui-cells_after-title">
+        <!-- 产品编号 -->
+        <!-- <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">门店编号</view>
+          </view>
+          <view class="weui-cell__bd weui-cell__ft">
+            <input class="weui-input" type="digit" bindinput='getFruitID' />
+          </view>
+        </view> -->
+        <!-- 产品名称 -->
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">门店名称</view>
+          </view>
+          <view class="weui-cell__bd weui-cell__ft">
+            <input class="weui-input" bindinput='getShopName' />
+          </view>
+        </view>
+        <!-- 价格 -->
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">门店位置</view>
+          </view>
+          <view class="weui-cell__bd weui-cell__ft">
+            <input class="weui-input" type="digit" bindtap='moveToLocation' value="{{shopAddress}}" />
+          </view>
+        </view>
+        <!-- 单位 -->
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">门店联系电话</view>
+          </view>
+          <view class="weui-cell__bd weui-cell__ft">
+            <input class="weui-input" bindinput='getShopPhone' />
+          </view>
+        </view>
+
+      </view>
+
+      <!---------- 描述信息 ------------->
+      <view class="weui-cells__title">描述信息</view>
+
+      <view class="weui-cells weui-cells_after-title">
+
+        <!-- 描述照片 -->
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__bd cell-title">logo</view>
+          <view class="weui-cell__ft">
+            <picker range="{{Operator_Arr}}" value="{{Operator}}" bindchange="getOperator">
+              <view class="weui-input"></view>
+            </picker>
+          </view>
+        </view>
+        <!-- 添加照片 -->
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <view class="weui-uploader">
+              <view class="weui-uploader__bd">
+                <view class="weui-uploader__files" id="uploaderFiles">
+                  <block wx:for="{{files}}" wx:key="*this">
+                    <view class="weui-uploader__file" bindtap="previewImage" id="{{item}}">
+                      <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
+                    </view>
+                  </block>
+                </view>
+
+                <view class="weui-uploader__input-box" wx:if="{{files.length==0}}">
+                  <view class="weui-uploader__input" bindtap="chooseImage"></view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <!-- 详细信息 -->
+        <view class="weui-cell">
+          <view class="weui-uploader__hd">
+            <view class="section">
+              <textarea bindblur="getShopInfo" auto-height placeholder="门店的详细信息" style="min-height: 250rpx;" />
+            </view>
+          </view>
+        </view>
+
+
+      </view>
+
+
+
+      <!---------- 按钮 ------------->
+      <view class="weui-btn-area">
+        <button class="weui-btn" type="primary" bindtap="addShop">确认添加商铺信息</button>
+      </view>
+
+      <!-- end -->
+    </view>
+  </view>
+
+</view>

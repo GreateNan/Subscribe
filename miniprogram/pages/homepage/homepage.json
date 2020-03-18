@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "潮人美业预约",
+  "usingComponents": {
+    "mySearch":"/components/search/search",
+    "swiper": "/components/swiper/swiper"
+  }
+}
