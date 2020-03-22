@@ -7,13 +7,27 @@ const db = cloud.database()
 // 云函数入口函数
 //传递的参数可通过event.xxx得到
 exports.main = async (event, context) => {
-  try {
-    return await db.collection(event.name).where(event.rule).get({
-    })
-    // db.collection(setName).where(selectConditionSet).get({
-    //   success: callBack
-    // })
-  } catch (e) {
-    console.error(e)
+  if (event.orderarr) {
+    try {
+     
+      return await db.collection(event.name).where(event.rule).orderBy(event.orderarr.ruleItem, event.orderarr.orderFuc).get({
+      })
+      // db.collection(setName).where(selectConditionSet).get({
+      //   success: callBack
+      // })
+    } catch (e) {
+      console.error(e)
+    }
+  }else{
+    try {
+      return await db.collection(event.name).where(event.rule).get({
+      })
+      // db.collection(setName).where(selectConditionSet).get({
+      //   success: callBack
+      // })
+    } catch (e) {
+      console.error(e)
+    }
   }
+
 }

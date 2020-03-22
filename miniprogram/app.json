@@ -1,14 +1,11 @@
 {
   "cloud": true,
   "pages": [
-      "pages/homepage/homepage",
+    "pages/homepage/homepage",
+    "pages/appointment/appointmentInfo",
     "pages/me/me",
     "pages/bgManage/bgManage",
-  
-  
     "pages/bgInfo/bgInfo",
-   
-    "pages/appointment/appointmentInfo",
     "pages/cart/cart",
     "pages/dateCommnet/dateCommnet",
     "pages/detail/detail",

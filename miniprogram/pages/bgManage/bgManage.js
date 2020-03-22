@@ -11,19 +11,19 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     this.getAllList()
   },
 
   // --------------------!!!  选项卡切换  !!!----------------------
-  tapTo1: function () {  //添加
+  tapTo1: function() { //添加
     var that = this
     that.setData({
       cardNum: 1
     })
     that.getAllList()
   },
-  tapTo2: function () { //修改和删除
+  tapTo2: function() { //修改和删除
     var that = this
     that.setData({
       cardNum: 2
@@ -31,21 +31,27 @@ Page({
     that.getAllList()
     // console.log(getCurrentPages())
   },
-  tapTo3: function () {
+  tapTo3: function() {
     var that = this
     that.setData({
       cardNum: 3
     })
     that.getAllList()
   },
-  tapTo4: function () {
+  tapTo4: function() {
     var that = this
     that.setData({
       cardNum: 4
     })
-    that.getAllList()
+    app.getInfoByOrder2('order_master', 'orderTime', 'desc', {}, e => {
+      that.setData({
+        orderList: e.data
+      })
+      console.log(e, "全部服务")
+    })
+
   },
-  tapTo5: function () {
+  tapTo5: function() {
     var that = this
     that.setData({
       cardNum: 5
@@ -54,7 +60,7 @@ Page({
   },
   // ----------------------!!!  订单管理  !!!----------------------
   // 已支付-发货
-  boxFruit: function (e) {
+  boxFruit: function(e) {
     var that = this
     console.log(e.currentTarget.id)
     // app.updateInfo('order_master', e.currentTarget.id, {
@@ -75,10 +81,10 @@ Page({
         name: 'order_master',
         id: e.currentTarget.id,
         data: {
-        status:5
+          status: 5
         }
       },
-      success: function (res) {
+      success: function(res) {
         console.log(res)
         that.getAllList()
         wx.showToast({
@@ -91,7 +97,7 @@ Page({
   },
 
   // 已发货-送达
-  sendingFruit: function (e) {
+  sendingFruit: function(e) {
     var that = this
     console.log(e.currentTarget.id)
     // app.updateInfo('order_master', e.currentTarget.id, {
@@ -115,7 +121,7 @@ Page({
           finishedTime: app.CurrentTime_show()
         }
       },
-      success: function (res) {
+      success: function(res) {
         console.log(res)
         that.getAllList()
         wx.showToast({
@@ -125,14 +131,14 @@ Page({
       fail: console.error
     })
   },
-  binRm:function(e){
-    let that=this
+  binRm: function(e) {
+    let that = this
     wx.showModal({
       title: '提示',
       content: '您将删除该订单',
-      success(res){
+      success(res) {
         console.log(res)
-        if (res.confirm){
+        if (res.confirm) {
           wx.cloud.callFunction({
             // 云函数名称
             name: 'deletOrder',
@@ -140,9 +146,9 @@ Page({
             data: {
               name: 'order_master',
               id: e.currentTarget.id,
-             
+
             },
-            success: function (res) {
+            success: function(res) {
               console.log(res)
               that.getAllList()
               wx.showToast({
@@ -154,39 +160,44 @@ Page({
         }
       }
     })
-    
+
   },
 
   // 获取所有订单信息
-  getAllList: function () {
+  getAllList: function() {
     var that = this
-    if (that.data.cardNum==4){
-      app.getInfoByOrder2('order_master', 'orderTime', 'desc', { }, e => {
+    //全部服务
+    if (that.data.cardNum == 4) {
+      app.getInfoByOrder2('order_master', 'orderTime', 'desc', {}, e => {
         that.setData({
           orderList: e.data
         })
-        console.log(e)
+        console.log(e,"全部服务")
       })
 
-    } else if (that.data.cardNum == 3){
-      app.getInfoByOrder2('order_master', 'orderTime', 'desc', { 'status': 2 }, e => {
+    } else if (that.data.cardNum == 3) {
+      app.getInfoByOrder2('order_master', 'orderTime', 'desc', {
+        'status': 2
+      }, e => {
         let temp = e.data
-        let arr=[]
+        let arr = []
         for (let a in temp) {
 
           console.log(Date.parse(new Date()) > Date.parse(temp[a].fruitList.startTime.replace(/-/g, '/').substring(0, 19)))
           if (Date.parse(new Date()) > Date.parse(temp[a].fruitList.startTime.replace(/-/g, '/').substring(0, 19))) {
-         
-           arr.push(a)
+
+            arr.push(a)
           }
-        
+
         }
         that.setData({
           orderList: arr
         })
       })
     }
-    app.getInfoByOrder2('order_master', 'orderTime', 'desc', { 'status': that.data.cardNum} ,e => {
+    app.getInfoByOrder2('order_master', 'orderTime', 'desc', {
+      'status': that.data.cardNum
+    }, e => {
       that.setData({
         orderList: e.data
       })
@@ -198,49 +209,49 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })

@@ -22,7 +22,11 @@
           <view wx:for="{{item.sever}}" wx:for-item="fruitArr" wx:key="fruit">{{fruitArr}}</view>
           <view>备注：{{item.remark}}</view>
           <view>下单时间：{{item.orderTime}}</view>
-             <view>服务者：{{item.fruitboardname}}</view>
+          <view>服务者：{{item.fruitboardname}}</view>
+          <view>服务内容</view>
+          <view wx:for="{{item.serve}}">
+            {{item}}
+          </view>
         </view>
 
         <view class='Btns'>
@@ -38,7 +42,7 @@
 <!-- 已发货 -->
 <view class='addFruit' wx:if="{{cardNum === 2||cardNum === 5||cardNum === 3}}">
 
- <view class='theList'>
+  <view class='theList'>
     <view class="weui-cells weui-cells_after-title">
       <view wx:for="{{orderList}}" wx:key="idx" class='listItem' wx:if="{{!item.sending}}">
         <view class='f_column'>
@@ -50,7 +54,11 @@
           <view wx:for="{{item.sever}}" wx:for-item="fruitArr" wx:key="fruit">{{fruitArr}}</view>
           <view>备注：{{item.remark}}</view>
           <view>下单时间：{{item.orderTime}}</view>
-             <view>服务者：{{item.fruitboardname}}</view>
+          <view>服务者：{{item.fruitboardname}}</view>
+            <view>服务内容</view>
+          <view wx:for="{{item.serve}}">
+            {{item}}
+          </view>
         </view>
 
         <view class='Btns'>
@@ -89,7 +97,7 @@
 <!-- 全部 -->
 <view class='addFruit' wx:if="{{cardNum === 4}}">
 
- <view class='theList'>
+  <view class='theList'>
     <view class="weui-cells weui-cells_after-title">
       <view wx:for="{{orderList}}" wx:key="idx" class='listItem' wx:if="{{!item.sending}}">
         <view class='f_column'>
@@ -101,7 +109,11 @@
           <view wx:for="{{item.sever}}" wx:for-item="fruitArr" wx:key="fruit">{{fruitArr}}</view>
           <view>备注：{{item.remark}}</view>
           <view>下单时间：{{item.orderTime}}</view>
-             <view>服务者：{{item.fruitboardname}}</view>
+          <view>服务者：{{item.fruitboardname}}</view>
+            <view>服务内容</view>
+          <view wx:for="{{item.serve}}">
+            {{item}}
+          </view>
         </view>
       </view>
 

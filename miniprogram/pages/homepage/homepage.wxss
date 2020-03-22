@@ -1,5 +1,5 @@
 page {
-  background-color: #f4F4F4;
+  background-color: #f4f4f4;
 }
 
 /* 轮播图 */
@@ -19,7 +19,7 @@ page {
   display: flex;
   justify-content: start;
   padding: 5rpx 20rpx 0 20rpx;
-  background: rgb(254, 152, 68,0.5);
+  background: rgb(254, 152, 68, 0.5);
   margin-top: 15rpx;
 }
 
@@ -45,7 +45,7 @@ page {
   font-size: 25rpx;
   text-align: center;
   line-height: 60rpx;
-  background-color: rgb(253, 116, 100,0.5);
+  background-color: rgb(253, 116, 100, 0.5);
   color: rgb(255, 255, 255);
 }
 
@@ -112,7 +112,6 @@ page {
 
 .fruit-item  .all {
   flex: 9;
-
   justify-content: space-between;
 }
 
@@ -142,6 +141,16 @@ page {
 .heard {
   width: 100%;
   margin: 10% 0;
+}
+
+.kapian .address button {
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  font-size: 24rpx;
+  color: #fff;
+  border: 0;
+  width:180rpx; 
 }
 
 .heard .kapian {
@@ -195,8 +204,9 @@ page {
   width: 30rpx;
   height: 30rpx;
 }
-.call{
-  background-color: rgb(0, 0, 0,0.2);
+
+.call {
+  background-color: rgb(0, 0, 0, 0.2);
   position: fixed;
   right: 20rpx;
   bottom: 20%;
@@ -207,7 +217,15 @@ page {
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  height:80rpx;
+  height: 80rpx;
   width: 80rpx;
-  
+}
+
+
+.button-hover {
+  background-color: transparent;
+}
+
+button::after {
+  border: 0;
 }

@@ -10,9 +10,10 @@
   <!-- <view style='height:500rpx;width:100%'> 
   <swiper></swiper>
 </view> -->
+
   <!-- 店铺信息 -->
   <view class="heard flexr">
-    <view class="kapian flexr">
+    <view class="kapian flexr" wx:if="{{shop}}">
       <view class="logo">
         <image src="{{shop.shopLogo}}"></image>
       </view>
@@ -23,10 +24,14 @@
         </view>
         <view style="font-size:24rpx;" class="flexr address">
           <view> {{shop.shopAddress}}</view>
-          <view class="flexr yjt" bindtap="map">
+          <view class="flexr yjt" bindtap="map" wx:if="{{juli}}">
             <text>{{juli}}km</text>
             <image src="../../images/icon/yjt.png"></image>
           </view>
+          <button wx:else open-type="openSetting" bindopensetting="callback" class="flexr yjt" style=" padding:0">
+            <image src="../../images/icon/setting.png"></image>
+            <text>设置</text>
+          </button>
         </view>
 
         <view class="flexr" style="justify-content: flex-start; font-size:24rpx;margin-top:20rpx;" bindtap="phone">

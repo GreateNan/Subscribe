@@ -76,7 +76,7 @@ Page({
         break;
       // 店长
       case '1':
-        app.getInfoWhere('fruit-board', { 'position':"0"},
+        app.getInfoWhere('fruit-board', { 'position': "0" },
           e => {
             getCurrentPages()["0"].setData({
               fruitInfo: e.data
@@ -86,7 +86,7 @@ Page({
         break;
       //  首席
       case '2':
-        app.getInfoWhere('fruit-board', { 'position':"1"},
+        app.getInfoWhere('fruit-board', { 'position': "1" },
           e => {
             console.log(e)
             getCurrentPages()["0"].setData({
@@ -120,11 +120,10 @@ Page({
     })
     // 获取openId
     that.getOpenid();
-    //获取用户位置信息
-    that.getwei()
+
   },
   // 打电话
-  phone:function(){
+  phone: function () {
     wx.makePhoneCall({
       phoneNumber: this.data.shop.shopPhone //仅为示例，并非真实的电话号码
     })
@@ -137,7 +136,7 @@ Page({
       longitude: this.data.shop.longitude,
       name: this.data.shop.shopName,
       address: this.data.shop.shopAddress,
-      scale: 18, success(res){
+      scale: 18, success(res) {
         console.log(res)
       }
     })
@@ -150,33 +149,95 @@ Page({
       success: function (res) {
         console.log(res, "获取位置信息")
         //获取店铺
-        app.getInfoWhere('shop', {},
-          e => {
-            console.log(e.data[0], "获取店铺")
+        wx.cloud.callFunction({
+          // 云函数名称
+          name: 'selectMap',
+          // 传给云函数的参数
+          data: {
+            name: 'shop',
+            rule: {
+
+            },
+
+          },
+          success: function (res) {
+            let temp = res.result.data
+            console.log(temp, "获取店铺")
             that.setData({
-              shop: e.data[0],
-              juli: (that.getDistance(e.data[0].latitude, e.data[0].longitude, res.latitude, res.longitude) / 1000).toFixed(0)
+              shop: temp[0],
+              juli: (that.getDistance(temp[0].latitude, temp[0].longitude, res.latitude, res.longitude) / 1000).toFixed(0)
             })
-            console.log(that.getDistance(e.data[0].latitude, e.data[0].longitude, res.latitude, res.longitude))
-            console.log(that.data.shop, "++++++++++")
-          }
-        )
+
+          },
+          fail: console.error
+        })
+        // app.getInfoWhere('shop', {},
+        //   e => {
+        //     console.log(e.data[0], "获取店铺")
+        //     that.setData({
+        //       shop: e.data[0],
+        //       juli: (that.getDistance(e.data[0].latitude, e.data[0].longitude, res.latitude, res.longitude) / 1000).toFixed(0)
+        //     })
+        //     console.log(that.getDistance(e.data[0].latitude, e.data[0].longitude, res.latitude, res.longitude))
+        //     console.log(that.data.shop, "++++++++++")
+        //   }
+        // )
 
       },
       fail: function (res) {
-
-        if (!wx.getStorageSync("loctionFlag")) {
+        console.log(res)
+        if (res.errMsg == "getLocation:fail auth deny") {
           wx.showModal({
             title: '提示',
-            content: '您可能未打开位置，请打开后重试',
+            content: "您拒绝授权将影响为您计算我们直接的距离，您可以点击当前页面的设置重新获取位置",
             showCancel: false
           })
 
+        }else{
+          wx.showModal({
+            title: '提示',
+            content: "您可能未打开定位请先去设置中打开位置信息",
+            showCancel: false
+          })
         }
+       
+        //获取店铺
+        wx.cloud.callFunction({
+          // 云函数名称
+          name: 'selectMap',
+          // 传给云函数的参数
+          data: {
+            name: 'shop',
+            rule: {
+
+            },
+
+          },
+          success: function (res) {
+            let temp = res.result.data
+            console.log(temp, "获取店铺")
+            that.setData({
+              shop: temp[0],
+              //juli: (that.getDistance(temp[0].latitude, temp[0].longitude, res.latitude, res.longitude) / 1000).toFixed(0)
+            })
+
+          },
+          fail: console.error
+        })
 
       }
     })
   },
+  callback: function (res) {
+    console.log(res)
+    console.log(res.detail.authSetting['scope.userLocation'])
+   
+    if (res.detail.authSetting['scope.userLocation']) {
+      this.getwei()
+    }
+  },
+
+  
   // 获取俩个位置的距离
   getDistance: function (lat1, lng1, lat2, lng2) {
 
@@ -208,7 +269,8 @@ Page({
 
   onShow: function () {
     var that = this
-
+    //获取用户位置信息
+    that.getwei()
     app.getInfoByOrder('fruit-board', 'time', 'desc',
       e => {
         console.log(e, "onshow")

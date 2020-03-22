@@ -9,17 +9,16 @@ Page({
     isAdmin: -1,
     openid: '',
     adiminArr: [
-      'oPUd55BpdYy4lDncUt-gRQmL9TbA',
-      'oA9Ke4tObqwxqNSfALdVZPkVv7Yc',
-      'oA9Ke4rH2nnqFgFbWIhyQu5bCXPA'
+  
     ]
   },
   onLoad() {
     var that = this;
     that.getOpenidAndOrders();
     // console.log(that.data)
+  
   },
-  tel: function() {
+  tel: function () {
     wx.makePhoneCall({
       phoneNumber: '15847661405',
     })
@@ -29,8 +28,8 @@ Page({
     wx.showModal({
       title: "提示",
       content: '您确认取消当前服务吗',
-      success(res){
-        if (res.confirm){
+      success(res) {
+        if (res.confirm) {
           wx.cloud.callFunction({
             // 云函数名称
             name: 'updataOrder',
@@ -41,8 +40,6 @@ Page({
               data: {
                 "status": 2
               }
-
-
             },
             success: function (res) {
               wx.showToast({
@@ -62,12 +59,12 @@ Page({
 
   },
   // 允许订阅永久的管理员消息
-  adminManage:function(){
+  adminManage: function () {
     wx.requestSubscribeMessage({
       tmplIds: ['P0a5HdNnawmd3-PB1ScjT2KwIF2fIQQG61_jY0v_rlI'],
       success(res) {
         console.log(res['P0a5HdNnawmd3-PB1ScjT2KwIF2fIQQG61_jY0v_rlI'])
-       }
+      }
     })
   },
   onShow() {
@@ -78,7 +75,7 @@ Page({
      */
     wx.getStorage({
       key: 'address',
-      success: function(res) {
+      success: function (res) {
         self.setData({
           hasAddress: true,
           address: res.data
@@ -86,90 +83,135 @@ Page({
       }
     })
   },
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
     var that = this
     that.getOpenidAndOrders()
     var timer
 
-    (timer = setTimeout(function() {
+    (timer = setTimeout(function () {
       wx.stopPullDownRefresh()
     }, 500));
 
   },
+  getAdminArr() {
+    let that=this
+    return new Promise((resolve, reject) => {
+      wx.cloud.callFunction({
+        // 云函数名称
+        name: 'selectMap',
+        // 传给云函数的参数
+        data: {
+          name: 'adminArray',
+          rule: {
+       
+          },
 
+        },
+        success: function (res) {
+          let temp = res.result.data
+          let arr = []
+          console.log(res)
+          for (let a of temp) {
+            arr.push(a.adminId)
+          }
+          console.log(arr)
+          that.setData(
+            {
+              adiminArr: arr
+            }
+          )
+          resolve()
+          
+        },
+        fail: console.error
+      })
+    })
+ 
+
+  },
   // 获取用户openid
   getOpenidAndOrders() {
     var that = this;
-    wx.cloud.callFunction({
-      name: 'add',
-      complete: res => {
-        console.log('云函数获取到的openid: ', res.result.openId)
-        var openid = res.result.openId;
-        var isAdmin = null;
-        that.setData({
-          openid: openid,
-          isAdmin: that.data.adiminArr.indexOf(openid)
-        })
-        wx.cloud.callFunction({
-          // 云函数名称
-          name: 'selectMap',
-          // 传给云函数的参数
-          data: {
-            name: 'order_master',
-            rule: {
-              '_openid': that.data.openid,
-            },
 
-          },
-          success: function(res) {
-            console.log(res)
-            let temp = res.result.data
-            for (let a in temp) {
+    that.getAdminArr().then(function () {
 
-              console.log(Date.parse(new Date()) > Date.parse(temp[a].fruitList.startTime.replace(/-/g, '/').substring(0, 19)))
-              if (Date.parse(new Date()) > Date.parse(temp[a].fruitList.startTime.replace(/-/g, '/').substring(0, 19))) {
-                console.log("ssssss")
-                temp[a].istimeOut = true
+      wx.cloud.callFunction({
+        name: 'add',
+        complete: res => {
+          console.log('云函数获取到的openid: ', res.result.openId)
+          var openid = res.result.openId;
+          var isAdmin = null;
+          that.setData({
+            openid: openid,
+            isAdmin: that.data.adiminArr.indexOf(openid)
+          })
+          wx.cloud.callFunction({
+            // 云函数名称
+            name: 'selectMap',
+            // 传给云函数的参数
+            data: {
+              name: 'order_master',
+              rule: {
+                '_openid': that.data.openid,
+               
+              },
+              orderarr:{
+                ruleItem: 'orderTime',
+                orderFuc: 'desc'
               }
-              util.getDateDiff(new Date(), temp[a].fruitList.startTime, function(obj) {
-                temp[a].timeDjs = obj.timeDiff;
+
+            },
+            success: function (res) {
+              console.log(res)
+              let temp = res.result.data
+              for (let a in temp) {
+
+                console.log(Date.parse(new Date()) > Date.parse(temp[a].fruitList.startTime.replace(/-/g, '/').substring(0, 19)))
+                if (Date.parse(new Date()) > Date.parse(temp[a].fruitList.startTime.replace(/-/g, '/').substring(0, 19))) {
+
+                  temp[a].istimeOut = true
+                }
+                util.getDateDiff(new Date(), temp[a].fruitList.startTime, function (obj) {
+                  temp[a].timeDjs = obj.timeDiff;
+                })
+              }
+
+
+              that.setData({
+                orders: temp
               })
-            }
 
-
-            that.setData({
-              orders: temp
-            })
-
-          },
-          fail: console.error
-        })
-        // app.getInfoWhere('order_master',{
-        //   "_openid": openid
-        // },e=>{
-        //   console.log(e)
-        //   var tmp = []
-        //   var len = e.data.length
-        //   for (var i = 0; i < len;i++){
-        //     tmp.push(e.data.pop())
-        //   }
-        //   that.setData({
-        //     orders: tmp
-        //   })
-        // })
-      }
-    })
+            },
+            fail: console.error
+          })
+          // app.getInfoWhere('order_master',{
+          //   "_openid": openid
+          // },e=>{
+          //   console.log(e)
+          //   var tmp = []
+          //   var len = e.data.length
+          //   for (var i = 0; i < len;i++){
+          //     tmp.push(e.data.pop())
+          //   }
+          //   that.setData({
+          //     orders: tmp
+          //   })
+          // })
+        }
+      })
+    });
+   
   },
 
 
 
-  goToBgInfo: function() {
+  goToBgInfo: function () {
     wx.navigateTo({
       url: '/pages/bgInfo/bgInfo',
     })
   },
 
-  goToBgManage: function() {
+  goToBgManage: function () {
     wx.navigateTo({
       url: '/pages/bgManage/bgManage',
     })

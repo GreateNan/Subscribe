@@ -312,7 +312,7 @@ return myDate;
       templateId:'P0a5HdNnawmd3-PB1ScjTxoVEGBhTUCaqBZusYwLLjk',
       touser: that.data.openid,
       tiemC:2,
-      startTime: Date.parse(new Date(that.data.startTime.replace(/-/g, "/"))) - 120000
+      startTime: Date.parse(new Date(that.data.startTime.replace(/-/g, "/"))) - 3600000
     }
     // 上传数据库
     app.addRowToSet('message', message, e => {

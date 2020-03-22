@@ -10,7 +10,7 @@
     </view>
     <view class="flexc" style="justify-content:flex-start;align-items: flex-start;">
       <view style="font-size:50rpx;">{{time}}</view>
-     
+
       <view style="font-size:26rpx;margin-top:20rpx;">{{date}}({{sWeek}})</view>
       <view class="flexr " style="margin-top:10rpx;">
         <image src="../../images/icon/sun.png" class="icon"></image>
@@ -56,6 +56,7 @@
         <input placeholder="您有什么特殊要求可以著名" bindinput="in" data-id="1"></input>
       </view>
     </view>
+    
   </view>
 
   <view class="yuyue" bindtap="exchange">

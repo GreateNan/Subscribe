@@ -14,7 +14,7 @@ Page({
     heddin: false,
     flag: false,
     startTime: '08:00',
-    endTime: '22:00',
+    endTime: '21:00',
     unit: 60,
     reserveUnit: 60,
     // { // 预约时间单位（默认60分钟）
