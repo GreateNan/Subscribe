@@ -316,7 +316,7 @@ return myDate;
     }
     // 上传数据库
     app.addRowToSet('message', message, e => {
-      console.log("保存通知成功" + e)
+      console.log("保存通知成功" + JSON.stringify(e))
 
     })
   },
